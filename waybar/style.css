@@ -1,0 +1,98 @@
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "SF Pro Display", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0.25);   /* прозрачный */
+    color: #cccccc;                    /* серый текст/иконки */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+#workspaces {
+margin: 0 8px;
+}
+
+#workspaces button {
+padding: 0 6px;
+color: rgba(255, 255, 255, 0.4);
+background: transparent;
+font-size: 20px;
+transition: all 0.2s ease;
+border-radius: 10px;
+}
+
+#workspaces button.active {
+color: #ffffff;
+text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+#workspaces button:hover {
+color: #ffffff;
+background: rgba(255, 255, 255, 0.1);
+}
+
+#window {
+margin: 0 12px;
+color: #aaaaaa;
+font-weight: 400;
+font-size: 13px;
+}
+
+#backlight, #pulseaudio, #network, #bluetooth, #battery, #clock, #custom-power, #tray {
+margin: 0 4px;
+padding: 0 8px;
+color: #cccccc;
+border-radius: 10px;
+transition: background 0.2s, color 0.2s;
+}
+
+#backlight:hover, #pulseaudio:hover, #network:hover, #bluetooth:hover, #battery:hover, #clock:hover, #custom-power:hover {
+background: rgba(255, 255, 255, 0.08);
+color: #ffffff;
+}
+
+#tray {
+padding-right: 12px;
+}
+
+#custom-power {
+padding-right: 12px;
+font-size: 16px;
+}
+
+#backlight {
+margin-right: 2px;
+}
+
+#pulseaudio {
+margin-right: 2px;
+}
+
+#network {
+margin-right: 2px;
+}
+
+#bluetooth {
+margin-right: 2px;
+}
+
+#battery {
+margin-right: 2px;
+}
+
+#clock {
+margin-right: 6px;
+font-weight: 500;
+}
+
+#backlight label, #pulseaudio label, #network label, #bluetooth label, #battery label, #clock label {
+color: #cccccc;
+}
+
