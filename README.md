@@ -1,75 +1,153 @@
 ```markdown
-# My-hyprland
+<div align="center">
 
-Персональная конфигурация Hyprland с настройками Waybar, шейдерами и скриптами автозапуска.
+# 🪟 My-hyprland
 
-## 📋 Требования
+**Персональная конфигурация Hyprland с Waybar, шейдерами и Lua-конфигом**
 
-Для корректной работы данной конфигурации необходимы следующие компоненты:
+[![Artix Linux](https://img.shields.io/badge/Artix_Linux-runit-10b981?style=for-the-badge&logo=artixlinux&logoColor=white)](https://artixlinux.org/)
+[![Hyprland](https://img.shields.io/badge/Hyprland-Wayland-58e1ff?style=for-the-badge&logo=wayland&logoColor=white)](https://hyprland.org/)
+[![Waybar](https://img.shields.io/badge/Waybar-Status_Bar-00b4ab?style=for-the-badge)](https://github.com/Alexays/Waybar)
+[![License](https://img.shields.io/badge/License-As_Is-ff6b6b?style=for-the-badge)](#-лицензия)
 
-### Основные зависимости
+<img src="https://raw.githubusercontent.com/TeZFuN/My-hyprland/main/preview.png" alt="preview" width="800"/>
 
-| Пакет | Назначение |
+</div>
+
+---
+
+## 📖 О проекте
+
+Данная конфигурация создана и протестирована под **Artix Linux** с инициализацией **runit**. 
+Все сервисы (PipeWire, WirePlumber, D-Bus) запускаются через `runit` либо вручную через скрипт автозапуска, 
+встроенный в `hyprland.lua`.
+
+> ⚠️ **Важно:** на systemd-дистрибутивах (Arch, EndeavourOS, CachyOS и т.д.) скрипт `start_audio.sh` 
+> может конфликтовать с уже запущенными системными юнитами. Отключите соответствующие unit'ы или 
+> закомментируйте автозапуск в `hyprland.lua`.
+
+---
+
+## ✨ Особенности
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎨 Оформление
+- Градиентные границы окон
+- Размытие и прозрачность
+- Плавные анимации
+- Скруглённые углы
+
+</td>
+<td width="50%">
+
+### ⚙️ Функционал
+- Управление яркостью через DDC/CI
+- Жесты тремя пальцами
+- Раскладки `us` / `ru` (Alt+Shift)
+- Медиаплеер в Waybar
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📦 Требования
+
+### 🧩 Основные компоненты
+
+<table>
+<thead>
+<tr>
+<th align="left">Компонент</th>
+<th align="left">Назначение</th>
+<th align="center">Обязателен</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>hyprland</code></td><td>Wayland-композитор</td><td align="center">✅</td></tr>
+<tr><td><code>waybar</code></td><td>Статус-бар</td><td align="center">✅</td></tr>
+<tr><td><code>kitty</code></td><td>Терминал по умолчанию</td><td align="center">✅</td></tr>
+<tr><td><code>wofi</code></td><td>Лаунчер приложений</td><td align="center">✅</td></tr>
+<tr><td><code>hyprshade</code></td><td>Управление шейдерами (vibrance)</td><td align="center">✅</td></tr>
+<tr><td><code>awww</code></td><td>Демон обоев для Wayland</td><td align="center">✅</td></tr>
+<tr><td><code>pipewire</code></td><td>Звуковой сервер</td><td align="center">✅</td></tr>
+<tr><td><code>pipewire-pulse</code></td><td>PulseAudio-совместимость</td><td align="center">✅</td></tr>
+<tr><td><code>wireplumber</code></td><td>Менеджер сессий PipeWire</td><td align="center">✅</td></tr>
+<tr><td><code>dbus</code> / <code>dbus-runit</code></td><td>Шина сообщений</td><td align="center">✅</td></tr>
+<tr><td><code>qt6ct</code></td><td>Тема для Qt6-приложений</td><td align="center">🟡</td></tr>
+</tbody>
+</table>
+
+### 🔌 Плагины
+
+| Плагин | Описание |
 |---|---|
-| `hyprland` | Тайловый композитор Wayland |
-| `waybar` | Статус-бар |
-| `kitty` | Терминальный эмулятор (по умолчанию) |
-| `wofi` | Лаунчер приложений (меню) |
-| `hyprshade` | Управление шейдерами (vibrance и др.) |
-| `awww` | Демон обоев для Wayland |
-| `pipewire` | Звуковой сервер |
-| `pipewire-pulse` | PulseAudio-совместимый слой для PipeWire |
-| `wireplumber` | Менеджер сессий PipeWire |
-| `dbus` | Шина сообщений (для PipeWire) |
+| **Hyprlua** | Позволяет писать конфиг Hyprland на **Lua**. Данная сборка использует `hyprland.lua` вместо стандартного `hyprland.conf`. |
 
-### Плагины и утилиты
+### 🔤 Шрифты
 
-- **Hyprlua** — плагин, позволяющий конфигурировать Hyprland через Lua. Данная конфигурация использует `hyprland.lua` вместо стандартного `hyprland.conf`.
+- **Geist Mono Nerd Font** — критично для корректного отображения иконок Waybar.
 
-### Шрифты
+<details>
+<summary>📥 Установка шрифта (развернуть)</summary>
 
-- **Geist Mono Nerd Font** — обязательный шрифт для корректного отображения иконок в Waybar.
-
-Установка шрифта:
 ```bash
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GeistMono.zip -o GeistMono.zip
 mkdir -p ~/.local/share/fonts
 unzip GeistMono.zip -d ~/.local/share/fonts/GeistMono
 fc-cache -fv
 ```
+</details>
 
-### Темы оформления
+### 🎭 Темы
 
-- **cybr-hyprland** — тема для Hyprland.
-- **cybr-waybar** — конфигурация Waybar на основе темы cybr.
+- 🎨 [`cybr-hyprland`](https://github.com/cacarico) — оформление Hyprland
+- 🎨 `cybr-waybar` — оформление статус-бара
 
-### Переменные окружения
-
-- `QT_QPA_PLATFORMTHEME=qt6ct` — для корректной работы Qt-приложений.
+---
 
 ## 🚀 Установка
 
-### 1. Клонирование репозитория
+### Шаг 1 — Клонирование
 
 ```bash
 git clone https://github.com/TeZFuN/My-hyprland.git
 cd My-hyprland
 ```
 
-### 2. Установка зависимостей (Arch Linux)
+### Шаг 2 — Установка зависимостей
+
+<details>
+<summary><b>🐧 Artix Linux (рекомендуется)</b></summary>
 
 ```bash
-sudo pacman -S --needed hyprland waybar kitty wofi hyprshade awww \
+sudo pacman -S --needed \
+  hyprland waybar kitty wofi hyprshade awww \
+  pipewire pipewire-pulse wireplumber dbus-runit qt6ct
+```
+</details>
+
+<details>
+<summary><b>🏹 Arch Linux</b></summary>
+
+```bash
+sudo pacman -S --needed \
+  hyprland waybar kitty wofi hyprshade awww \
   pipewire pipewire-pulse wireplumber dbus qt6ct
 ```
 
-> **Примечание:** `awww` может отсутствовать в официальных репозиториях. Проверьте AUR или альтернативные источники.
+> `awww` может отсутствовать в репозиториях — установите из AUR.
+</details>
 
-### 3. Установка плагина Hyprlua
+### Шаг 3 — Установка Hyprlua
 
-Следуйте инструкциям из репозитория [Hyprlua](https://github.com/cacarico/Hyprlua) для сборки и установки плагина.
+Соберите и установите плагин по инструкции из репозитория [Hyprlua](https://github.com/cacarico/Hyprlua).
 
-### 4. Копирование конфигураций
+### Шаг 4 — Копирование конфигов
 
 ```bash
 # Hyprland
@@ -79,47 +157,100 @@ cp -r hypr ~/.config/
 cp -r waybar ~/.config/
 ```
 
-### 5. Настройка Waybar
+### Шаг 5 — Права на скрипты
 
-Убедитесь, что все скрипты исполняемы:
 ```bash
 chmod +x ~/.config/waybar/scripts/*
+chmod +x ~/.config/hypr/scripts/start_audio.sh
 ```
 
-Проверьте конфигурацию мониторов в `~/.config/waybar/config.jsonc` и раскомментируйте нужный блок (`BAR 2` для мультимониторных систем).
+### Шаг 6 — Настройка мониторов
 
-### 6. Автозапуск
+Откройте `~/.config/waybar/config.jsonc` и раскомментируйте нужный блок:
 
-Скрипт `start_audio.sh` автоматически запускает PipeWire, pipewire-pulse и wireplumber при старте сессии. Он уже прописан в `hyprland.lua`.
+- `BAR 1` — один монитор
+- `BAR 2` — несколько мониторов
+
+---
 
 ## 🖥️ Обзор конфигурации
 
-### Hyprland (`hypr/hyprland.lua`)
+### 🌊 Hyprland (`hypr/hyprland.lua`)
 
-- **Мониторы:** автоматическое определение с масштабом 1.2.
-- **Терминал:** kitty.
-- **Меню:** wofi.
-- **Автозапуск:** скрипт звука, Waybar, Hyprshade (vibrance), dbus, awww с установкой обоев.
-- **Раскладка:** us, ru с переключением по Alt+Shift.
-- **Жесты:** свайп тремя пальцами для переключения рабочих столов.
-- **Оформление:** градиентные границы, размытие, прозрачность, анимации.
+| Параметр | Значение |
+|---|---|
+| Мониторы | Автоопределение, scale `1.2` |
+| Терминал | `kitty` |
+| Лаунчер | `wofi` |
+| Раскладки | `us`, `ru` (переключение `Alt+Shift`) |
+| Жесты | Свайп 3 пальцами → смена воркспейса |
+| Автозапуск | `start_audio.sh`, Waybar, Hyprshade, D-Bus, awww |
 
-### Waybar (`waybar/`)
+### 📊 Waybar
 
-- Специальный модуль управления яркостью мониторов через прокрутку (DDC/CI).
-- Два профиля для одного и нескольких мониторов.
-- Скрипты: `bright.sh`, `bright-status.sh`, `mediaplayer.py`.
+- 🎚️ Модуль управления яркостью через **DDC/CI** (прокрутка колесом)
+- 📁 Два профиля конфигурации (1 / N мониторов)
+- 🐍 Скрипты: `bright.sh`, `bright-status.sh`, `mediaplayer.py`
 
-## 📝 Примечания
+---
 
-- Конфигурация рассчитана в первую очередь на **Arch Linux** (используются команды `pacman`).
-- Убедитесь, что ваша видеокарта поддерживает необходимые драйверы (Mesa, Vulkan).
-- Для работы `awww` требуется композитор с поддержкой `wlr-layer-shell` (Hyprland совместим).
-- Если Waybar не отображается или углы не скруглены, проверьте пути к SVG-файлам в `style.css`.
+## 🛠️ Устранение неполадок
+
+<details>
+<summary><b>Waybar не отображается / нет иконок</b></summary>
+
+Проверьте, что шрифт **Geist Mono Nerd Font** установлен:
+```bash
+fc-list | grep -i "GeistMono"
+```
+</details>
+
+<details>
+<summary><b>Нет звука после запуска сессии</b></summary>
+
+Убедитесь, что `start_audio.sh` исполняем и сервисы PipeWire не запущены через runit:
+```bash
+sv status pipewire wireplumber
+```
+</details>
+
+<details>
+<summary><b>Не работают обои (awww)</b></summary>
+
+Проверьте, что `awww` запущен и Hyprland использует `wlr-layer-shell`:
+```bash
+pgrep -a awww
+```
+</details>
+
+<details>
+<summary><b>Ошибка Hyprlua при старте</b></summary>
+
+Убедитесь, что плагин собран под **актуальную версию Hyprland** — API плагинов часто меняется.
+</details>
+
+---
+
+## 📝 Заметки
+
+> - ✅ Конфигурация ориентирована на **Artix Linux + runit**
+> - ⚠️ На systemd-системах возможны конфликты сервисов
+> - 🎮 Требуются рабочие драйверы Mesa / Vulkan
+> - 🖼️ `awww` требует композитора с поддержкой `wlr-layer-shell`
+
+---
 
 ## 📄 Лицензия
 
-Конфигурация предоставляется как есть, без каких-либо гарантий.
-```
+<div align="center">
 
-Этот README охватывает все зависимости, которые я смог выявить из файлов конфигурации, включая неочевидные (плагин Hyprlua, шрифт, темы). Если в репозитории появятся новые компоненты, README можно будет дополнить.
+Конфигурация предоставляется **как есть**, без каких-либо гарантий.
+
+</div>
+
+---
+
+<div align="center">
+<sub>Сделано с ❤️ для Artix Linux + Hyprland</sub>
+</div>
+```
